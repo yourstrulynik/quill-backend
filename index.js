@@ -96,7 +96,7 @@ app.post("/login", async (req, res) => {
           if (err) {
             throw err;
           } else {
-            res.cookie("token", token,'cookieValue', { sameSite: 'none', secure: true}).json("Logged In");
+            res.cookie("token", token, { sameSite: 'none', secure: true}).json("Logged In");
           }
         }
       );
