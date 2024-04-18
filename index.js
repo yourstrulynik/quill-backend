@@ -28,7 +28,7 @@ const upload = require("./middleware/multer.js");
 const salt = bcrypt.genSaltSync(10);
 const jwtString = "asdfghjklzxcvbnm";
 
-app.use(cors({ credentials: true, origin: ["http://localhost:5173", "https://quill-backend.onrender.com"] }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173"}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -96,7 +96,7 @@ app.post("/login", async (req, res) => {
           if (err) {
             throw err;
           } else {
-            res.cookie("token", token).json("Logged In");
+            res.cookie("token", token,'cookieValue', { sameSite: 'none', secure: true}).json("Logged In");
           }
         }
       );
