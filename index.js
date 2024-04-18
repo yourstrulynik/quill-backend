@@ -28,7 +28,12 @@ const upload = require("./middleware/multer.js");
 const salt = bcrypt.genSaltSync(10);
 const jwtString = "asdfghjklzxcvbnm";
 
-app.use(cors({ credentials: true, origin: ["http://localhost:5173","https://quillblog.netlify.app"]}));
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:5173", "https://quillblog.netlify.app"],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -96,7 +101,9 @@ app.post("/login", async (req, res) => {
           if (err) {
             throw err;
           } else {
-            res.cookie("token", token, { sameSite: 'none', secure: true}).json("Logged In");
+            res
+              .cookie("token", token, { sameSite: "none", secure: true })
+              .json("Logged In");
           }
         }
       );
@@ -126,7 +133,9 @@ app.get("/profile", (req, res) => {
 
 // Logout API
 app.post("/logout", (req, res) => {
-  res.cookie("token", "").json("Logged Out");
+  res
+    .cookie("token", "", { sameSite: "none", secure: true })
+    .json("Logged Out");
 });
 
 // Upload Post API
